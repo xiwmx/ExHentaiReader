@@ -208,11 +208,12 @@ class GalleryPage {
     }
 
     getImagePageFromDOM(dom) {
-        const imageWidgets = dom.getElementsByClassName("gdtm");
+        const imageDiv = dom.getElementsByClassName("gt100")[0];
+        const imageWidgets = imageDiv.getElementsByTagName("a");
         for (let i = 0; i < imageWidgets.length; i++) {
             const imageWidget = imageWidgets[i];
-            const pageUrl = imageWidget.getElementsByTagName("a")[0].href;
-            const img = imageWidget.getElementsByTagName("img")[0];
+            const pageUrl = imageWidget.href;
+            const img = imageWidget.getElementsByTagName("div")[0];
             const height = Number(img.style.height.match(/\d*/)) || 139;
             const width = Number(img.style.width.match(/\d*/)) || 100;
             this.images[i].imagePageUrl = pageUrl;
@@ -245,11 +246,12 @@ class GalleryPage {
         this.callStack.push(imageWidget);
         const url = this.url;
         GET.call(this, url, function (d) {
-            const imageWidgets = d.getElementsByClassName("gdtm");
+            const imageDiv = d.getElementsByClassName("gt100")[0];
+            const imageWidgets = imageDiv.getElementsByTagName("a");
             for (let i = 0; i < imageWidgets.length; i++) {
                 const imageWidget = imageWidgets[i];
-                const pageUrl = imageWidget.getElementsByTagName("a")[0].href;
-                const img = imageWidget.getElementsByTagName("img")[0];
+                const pageUrl = imageWidget.href;
+                const img = imageWidget.getElementsByTagName("div")[0];
                 const height = Number(img.style.height.match(/\d*/)) || 139;
                 const width = Number(img.style.width.match(/\d*/)) || 100;
                 this.images[i].imagePageUrl = pageUrl;
